@@ -1,5 +1,5 @@
 import { fetchNotes } from "../../lib/api";
-import NotePage from "./Notes.client.tsx";
+import NotePage from "./Notes.client";
 
 const Notes = async () => {
   const notes = await fetchNotes("", 1);
