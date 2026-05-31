@@ -23,7 +23,7 @@ const initialValues: FormValues = {
 
 interface NoteFormProps {
   onClose: () => void;
-  resetSearch: () => void;
+  // resetSearch: () => void;
 }
 
 const OrderFormSchema = Yup.object().shape({
@@ -33,11 +33,11 @@ const OrderFormSchema = Yup.object().shape({
     .required("Title is required"),
   content: Yup.string().max(500, "Content is too long"),
   tag: Yup.mixed<NoteTag>()
-    .oneOf(["Work", "Personal", "Meeting", "Shopping", "Todo"])
+    .oneOf(["Todo", "Work", "Personal", "Meeting", "Shopping"])
     .required("Tag is required"),
 });
 
-export default function NoteForm({ onClose, resetSearch }: NoteFormProps) {
+export default function NoteForm({ onClose }: NoteFormProps) {
   const queryClient = useQueryClient();
   const fieldId = useId();
 
@@ -49,7 +49,7 @@ export default function NoteForm({ onClose, resetSearch }: NoteFormProps) {
         queryKey: ["notes"],
       });
 
-      resetSearch();
+      // resetSearch();
 
       toast.success("Note created successfully!");
 

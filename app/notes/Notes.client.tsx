@@ -12,11 +12,11 @@ import { useDebouncedCallback } from "use-debounce";
 import toast, { Toaster } from "react-hot-toast";
 import NoteForm from "../../components/NoteForm/NoteForm";
 
-type NotesClientProps = {
-  res: FetchNotesResponse;
-};
+// type NotesClientProps = {
+//   res: FetchNotesResponse;
+// };
 
-export default function NotesPage({ res }: NotesClientProps) {
+export default function NotesClient() {
   const [page, setPage] = useState(1);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -42,17 +42,16 @@ export default function NotesPage({ res }: NotesClientProps) {
       queryFn: () => fetchNotes(keyWord, page),
       // enabled: keyWord !== "",
       placeholderData: keepPreviousData,
-      initialData: res,
     });
 
-  const resetSearch = () => {
-    setKeyWord("");
-    setInputValue("");
-    setPage(1);
-  };
+  // const resetSearch = () => {
+  //   setKeyWord("");
+  //   setInputValue("");
+  //   setPage(1);
+  // };
 
   useEffect(() => {
-    if (isFetched && data?.notes?.length === 0) {
+    if (isFetched && data?.notes?.length === 0 && keyWord) {
       toast.error("No notes found for your request.", {
         duration: 1500,
       });
@@ -84,7 +83,7 @@ export default function NotesPage({ res }: NotesClientProps) {
         <Modal onClose={() => setIsOpenModal(false)}>
           <NoteForm
             onClose={() => setIsOpenModal(false)}
-            resetSearch={resetSearch}
+            // resetSearch={resetSearch}
           />
         </Modal>
       )}
